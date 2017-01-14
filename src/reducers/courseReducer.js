@@ -1,7 +1,7 @@
-export default function courseReducer(state = [], action) {
-    switch(action.type) {
+export default function courseReducer(state = [], { type, payload: course }) {
+    switch(type) {
     case 'CREATE_COURSE':
-        return [...state, Object.assign({}, action.payload.course)];
+        return [...state, Object.assign({}, course)];
     default:
         return state;
     }
