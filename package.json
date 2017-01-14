@@ -8,7 +8,7 @@
     "open:src": "babel-node ./tools/srcServer.js",
     "prestart": "babel-node ./tools/startMessage.js",
     "start": "npm-run-all --parallel open:src lint:watch test:watch",
-    "test": "mocha --reporter progress --growl ./tools/testSetup.js \"src/**/*.spec.js\"",
+    "test": "mocha --reporter progress ./tools/testSetup.js \"src/**/*.spec.js\"",
     "test:watch": "npm test -- --watch"
   },
   "keywords": [],
