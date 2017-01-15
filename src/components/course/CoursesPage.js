@@ -4,16 +4,16 @@ import { connect } from 'react-redux';
 
 import * as courseActions from '../../actions/courseActions';
 
-class CoursesPage extends React.Component {
-    courseRow(course, index) {
-        return <div key={index}>{course.title}</div>;
-    }
+import CourseList from './CourseList';
 
+class CoursesPage extends React.Component {
     render() {
+        const { courses } = this.props;
+
         return (
             <div>
                 <h1>Courses</h1>
-                {this.props.courses.map(this.courseRow)}
+                <CourseList courses={courses} />
             </div>
         );
     }
