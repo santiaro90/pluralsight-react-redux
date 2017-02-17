@@ -12,7 +12,8 @@ class ManageCoursePage extends React.Component {
 
         this.state = {
             course: Object.assign({}, props.course),
-            errors: {}
+            errors: {},
+            saving: false
         };
 
         this.saveCourse = this.saveCourse.bind(this);
@@ -29,8 +30,12 @@ class ManageCoursePage extends React.Component {
 
     saveCourse(event) {
         event.preventDefault();
-        this.props.actions.saveCourse(this.state.course);
-        this.context.router.push('/courses');
+
+        this.setState({ saving: true });
+
+        this.props.actions
+            .saveCourse(this.state.course)
+            .then(() => this.redirect());
     }
 
     updateCourseState(event) {
@@ -42,12 +47,18 @@ class ManageCoursePage extends React.Component {
         return this.setState({ course });
     }
 
+    redirect() {
+        this.setState({ saving: false });
+        this.context.router.push('/courses');
+    }
+
     render() {
         return (
             <CourseForm
                 allAuthors={this.props.authors}
                 course={this.state.course}
                 errors={this.state.errors}
+                saving={this.state.saving}
                 onChange={this.updateCourseState}
                 onSave={this.saveCourse} />
         );
